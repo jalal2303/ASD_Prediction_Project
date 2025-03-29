@@ -62,11 +62,11 @@ def adminlogin():
             cur = conn.cursor()
             cur.execute("SELECT * FROM regtb ")
             data = cur.fetchall()
-            flash("Login successfully")
+            flash("Logged in successfully")
             return render_template('AdminHome.html', data=data)
 
         else:
-            flash("UserName Or Password Incorrect!")
+            flash("Incorrect username or password!")
             return render_template('AdminLogin.html')
 
 
@@ -89,7 +89,7 @@ def ADRemove():
     conn.commit()
     conn.close()
 
-    flash('Doctor  info Remove Successfully!')
+    flash('Doctor info removed successfully!')
 
     conn = mysql.connector.connect(user='root', password='', host='localhost', database='brainasddb')
     cur = conn.cursor()
@@ -108,7 +108,7 @@ def AURemove():
     conn.commit()
     conn.close()
 
-    flash('User  info Remove Successfully!')
+    flash('User info removed successfully!')
 
     conn = mysql.connector.connect(user='root', password='', host='localhost', database='brainasddb')
     cur = conn.cursor()
@@ -150,7 +150,7 @@ def newdoct():
             "INSERT INTO doctortb VALUES ('','" + name + "','" + email + "','" + mobile + "','" + address + "','" + specialist + "','" + uname + "','" + password + "')")
         conn.commit()
         conn.close()
-        flash('Doctor  Register Successfully')
+        flash('Doctor registered successfully.')
         return render_template('DoctorLogin.html')
 
 
@@ -167,14 +167,14 @@ def doctlogin():
         data = cursor.fetchone()
         if data is None:
 
-            flash('Username or Password is wrong')
+            flash('Username or password is incorrect.')
             return render_template('DoctorLogin.html', data=data)
         else:
             conn = mysql.connector.connect(user='root', password='', host='localhost', database='brainasddb')
             cur = conn.cursor()
             cur.execute("SELECT * FROM doctortb where username='" + username + "' and Password='" + password + "'")
             data = cur.fetchall()
-            flash("Login successfully")
+            flash("Logged in successfully.")
             return render_template('DoctorHome.html', data=data)
 
 
@@ -216,7 +216,7 @@ def Accept():
     conn.commit()
     conn.close()
 
-    flash('Appointment Status  Update  Successfully!')
+    flash('Appointment status updated successfully!')
 
     username = session['ename']
     conn = mysql.connector.connect(user='root', password='', host='localhost', database='brainasddb')
@@ -243,7 +243,7 @@ def Reject():
     conn.commit()
     conn.close()
 
-    flash('Appointment Status  Update  Successfully!')
+    flash('Appointment status updated successfully!')
 
     username = session['ename']
     conn = mysql.connector.connect(user='root', password='', host='localhost', database='brainasddb')
@@ -267,7 +267,7 @@ def AssignDrug():
     if st == "Accept":
         return render_template('DAssignDrug.html')
     else:
-        flash("Appointment Reject")
+        flash("Appointment Rejected.")
         username = session['ename']
         conn = mysql.connector.connect(user='root', password='', host='localhost', database='brainasddb')
         cur = conn.cursor()
@@ -368,7 +368,7 @@ def newuser():
             "INSERT INTO regtb VALUES ('','" + name + "','" + email + "','" + mobile + "','" + address + "','" + uname + "','" + password + "')")
         conn.commit()
         conn.close()
-        flash('User Register successfully')
+        flash('User registered successfully.')
 
     return render_template('UserLogin.html')
 
@@ -386,7 +386,7 @@ def userlogin():
         data = cursor.fetchone()
         if data is None:
 
-            flash('Username or Password is wrong')
+            flash('Username or password is incorrect.')
             return render_template('UserLogin.html')
         else:
 
@@ -394,7 +394,7 @@ def userlogin():
             cur = conn.cursor()
             cur.execute("SELECT * FROM regtb where username='" + username + "' and Password='" + password + "'")
             data = cur.fetchall()
-            flash("Login successfully")
+            flash("Logged in successfully.")
 
             return render_template('UserHome.html', data=data)
 
@@ -436,7 +436,7 @@ def answer():
         if int(ccc) > 5:
             return render_template('ASD1.html')
         else:
-            flash('Your Are Perfect..!')
+            flash('You are perfect..!')
             return render_template('ASD.html')
 
 
@@ -516,7 +516,7 @@ def ViewDoctor():
             if data is None:
                 uname = session['uname']
 
-                flash('No Doctor Found!')
+                flash('No doctor found.')
                 conn = mysql.connector.connect(user='root', password='', host='localhost', database='brainasddb')
                 cur = conn.cursor()
                 cur.execute("SELECT * FROM regtb where username='" + uname + "' ")
@@ -573,7 +573,7 @@ def appointment():
 
         else:
 
-            return 'Incorrect username / password !'
+            return 'Incorrect username or password!'
 
         conn = mysql.connector.connect(user='root', password='', host='localhost', database='brainasddb')
         cursor = conn.cursor()
