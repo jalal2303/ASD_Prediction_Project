@@ -212,7 +212,7 @@ def Accept():
     conn = mysql.connector.connect(user='root', password='', host='localhost', database='brainasddb')
     cursor = conn.cursor()
     cursor.execute(
-        "update   apptb set status='Accept' where id='" + id + "'")
+        "update apptb set status='Accepted' where id='" + id + "'")
     conn.commit()
     conn.close()
 
@@ -239,7 +239,7 @@ def Reject():
     conn = mysql.connector.connect(user='root', password='', host='localhost', database='brainasddb')
     cursor = conn.cursor()
     cursor.execute(
-        "update apptb set status='Reject' where id='" + id + "'")
+        "update apptb set status='Rejected' where id='" + id + "'")
     conn.commit()
     conn.close()
 
@@ -264,7 +264,7 @@ def AssignDrug():
     id = request.args.get('id')
     st = request.args.get('st')
     session['apid'] = id
-    if st == "Accept":
+    if st == "Accepted":
         return render_template('DAssignDrug.html')
     else:
         flash("Appointment Rejected.")
